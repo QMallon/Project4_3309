@@ -17,15 +17,17 @@ namespace cddvdshop
         {
             return pList[upc];
         }
-
+        //adds product to list
         public void add(Product addProduct)
         {
             pList.Add(addProduct);
         }
+        //gets count of products in list
         public int Count()
         {
             return pList.Count;
         }
+        //gets a product of a 
         public Product getAnItem(int i)
         {
             return pList[i];

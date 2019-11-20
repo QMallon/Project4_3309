@@ -74,7 +74,7 @@ namespace cddvdshop
         private void frmBookCDDVDShop_Load(System.Object sender, System.EventArgs e)
         {
             // Read serialized binary data file
-            SFManager.readFromFile(ref thisProductList, FileName);
+            SFManager.ReadFromFile(ref thisProductList, FileName);
             FormController.clear(this);
             ToolTip toolTip1 = new ToolTip();
             // Set initial Tooltips

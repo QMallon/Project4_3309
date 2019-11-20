@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>cddvdshop.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,8 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Book.cs" />
+    <Compile Include="BookCIS.cs" />
     <Compile Include="CDChamber.cs" />
     <Compile Include="CDClassical.cs" />
+    <Compile Include="CDOrchestra.cs" />
+    <Compile Include="DVD.cs" />
     <Compile Include="FormController.cs" />
     <Compile Include="frmBookCDDVDShop.cs">
       <SubType>Form</SubType>

@@ -23,8 +23,8 @@ namespace cddvdshop
     public static class SFManager
 
     {
-        
-       
+
+
         // This class manages s serializable file object by reading from and writing to a file
 
         // Write the Product List to file as a serialized binary object
@@ -72,7 +72,7 @@ namespace cddvdshop
 
 
         // Read the Product List from file as a serialized binary object
-        public static bool readFromFile(ref ProductList plist, string fn)
+        public static bool ReadFromFile(ref ProductList plist, string fn)
         {
             Stream TestFileStream;
             BinaryFormatter deserializer = new BinaryFormatter();
