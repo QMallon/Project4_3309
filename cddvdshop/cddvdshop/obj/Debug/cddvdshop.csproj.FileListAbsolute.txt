@@ -16,3 +16,4 @@ C:\Users\qpm5\Documents\GitHub\Project4_3309\cddvdshop\cddvdshop\obj\Debug\cddvd
 C:\Users\qpm5\Documents\GitHub\Project4_3309\cddvdshop\cddvdshop\obj\Debug\cddvdshop.csproj.CoreCompileInputs.cache
 C:\Users\qpm5\Documents\GitHub\Project4_3309\cddvdshop\cddvdshop\obj\Debug\cddvdshop.exe
 C:\Users\qpm5\Documents\GitHub\Project4_3309\cddvdshop\cddvdshop\obj\Debug\cddvdshop.pdb
+C:\Users\qpm5\Documents\GitHub\Project4_3309\cddvdshop\cddvdshop\obj\Debug\cddvdshop.csprojAssemblyReference.cache

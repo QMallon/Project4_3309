@@ -100,7 +100,7 @@ namespace cddvdshop
             FormController.deactivateBookCIS(f);
             FormController.deactivateCDChamber(f);
             FormController.deactivateDVD(f);
-            FormController.deactivateAddButtons(f);
+            //FormController.deactivateAddButtons(f);
         }  // end deactivateAllButBook
 
         // Deactivate all but BookCIS
@@ -155,6 +155,7 @@ namespace cddvdshop
             f.btnDelete.Enabled = false;
             f.btnEdit.Enabled = false;
             f.btnFind.Enabled = false;
+            f.btnSaveEditUpdate.Enabled = true;
         }  // end formAddMode
 
 
@@ -186,7 +187,7 @@ namespace cddvdshop
             f.grpProduct.Enabled = true;
             f.grpProduct.BackColor = Color.LimeGreen;
             f.txtProductUPC.Enabled = true;
-            f.txtProductUPC.Enabled = true;
+            f.txtProductPrice.Enabled = true;
             f.txtProductTitle.Enabled = true;
             f.txtProductQuantity.Enabled = true;
         }  // end activateProduct
@@ -214,6 +215,7 @@ namespace cddvdshop
             f.grpCDClassical.BackColor = Color.Red;
             f.grpDVD.BackColor = Color.Red;
             f.txtBookISBNLeft.Enabled = true;
+            f.txtBookISBNRight.Enabled = true;
             f.txtBookAuthor.Enabled = true;
             f.txtBookPages.Enabled = true;
         }  // end activateBook

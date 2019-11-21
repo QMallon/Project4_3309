@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace cddvdshop
@@ -13,12 +6,12 @@ namespace cddvdshop
 
     public partial class frmBookCDDVDShop : Form
     {
-        FormController FormController;
+        //FormController FormController;
         public frmBookCDDVDShop()
         {
 
             InitializeComponent();
-            FormController = new FormController(this);
+            //FormController = new FormController(this);
 
         }
 
@@ -175,7 +168,68 @@ namespace cddvdshop
 
         private void btnCreateBook_Click(System.Object sender, System.EventArgs e)
         {
-            FormController.deactivateAllButBook(this);
+            if (txtBookISBNLeft.Enabled == false) {
+                FormController.activateBook(this);
+                FormController.deactivateAllButBook(this);
+                    }
+            else
+            {
+                validate();
+            }
+            
+        }
+
+        private void btnEnterUPC_Click(System.Object sender, System.EventArgs e)
+        {
+            try
+            {
+                if (thisProductList.Check(Convert.ToInt32(txtProductUPC.Text)))
+                {
+                    FormController.activateAddButtons(this);
+                }
+                
+                
+                
+            }
+            catch
+            {
+                MessageBox.Show("invalid UPC or data");
+            }
+        }
+
+        private void btnExit_Click(System.Object sender, System.EventArgs e)
+        {
+            SFManager.writeToFile(thisProductList, FileName);
+            Application.Exit();
+        }
+
+        private void validate()
+        {
+            try
+            {
+                int tempUPC = Convert.ToInt32(txtProductUPC.Text);
+                decimal tempPrice = Convert.ToDecimal(txtProductPrice.Text);
+                int tempQuant = Convert.ToInt32(txtProductQuantity.Text);
+
+                if(btnCreateBook.Enabled == true)
+                {
+                    int tempISBNL = Convert.ToInt32(txtBookISBNLeft.Text);
+                    int tempISBNR = Convert.ToInt32(txtBookISBNLeft.Text);
+                    int tempPages = Convert.ToInt32(txtBookPages.Text);
+                    thisProductList.add(new Book(tempUPC, tempPrice, txtProductTitle.Text, tempQuant, tempISBNL, tempISBNR, txtBookAuthor.Text, tempPages));
+                }
+
+            }
+            catch
+            {
+                MessageBox.Show("invalid data");
+            }
+
+        }
+
+        private void btnFind_Click(System.Object sender, System.EventArgs e)
+        {
+            thisProductList.Search(Convert.ToInt32(txtProductUPC.Text)).Display(this);
         }
     }
 }

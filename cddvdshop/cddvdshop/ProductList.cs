@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace cddvdshop
 {
@@ -15,7 +16,33 @@ namespace cddvdshop
         }
         public Product Search(int upc)
         {
-            return pList[upc];
+
+            foreach (Product p in pList) {
+                if(p.ProductUPC == upc)
+                {
+                    return p;
+                }
+            }
+            
+                
+            
+            
+            
+                MessageBox.Show("Product with that upc does not exist");
+               return null;
+            
+            
+        }
+        public bool Check(int upc)
+        {
+            foreach(Product p in pList)
+            {
+                if(p.ProductUPC == upc)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
         //adds product to list
         public void add(Product addProduct)

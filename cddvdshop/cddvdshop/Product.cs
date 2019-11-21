@@ -125,7 +125,23 @@ namespace cddvdshop
             s += "Product Quantity : " + Convert.ToInt32(hiddenQuantity);
             return s;
         }  // end ToString
-
+        public virtual bool validate(frmBookCDDVDShop f)
+        {
+            bool check = true;
+            try
+            {
+               //check = Convert.ToInt32(f.txtProductUPC.Text);
+                check = Decimal.Parse(f.txtProductPrice.Text) >0;
+               //check =  f.txtProductTitle.Text;
+                check = Convert.ToInt32(f.txtProductQuantity.Text) > 0;
+                return check;
+            }
+            catch
+            {
+                MessageBox.Show("Invalid data");
+                return false;
+            }
+        }
 
         // Display product info in a MessageBox
         public void displayProductAsString(Product p)
