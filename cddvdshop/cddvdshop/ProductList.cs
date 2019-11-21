@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace cddvdshop
 {
-    class ProductList
+    public class ProductList
     {
-        List<Product> pList = new List<Product>();
+        public List<Product> pList;
         public ProductList()
         {
-
+            pList = new List<Product>();
         }
         public Product Search(int upc)
         {

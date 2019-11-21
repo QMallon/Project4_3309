@@ -10,16 +10,19 @@ using System.Windows.Forms;
 
 namespace cddvdshop
 {
+
     public partial class frmBookCDDVDShop : Form
     {
+        FormController FormController;
         public frmBookCDDVDShop()
         {
 
             InitializeComponent();
-            //FormController FormController = new FormController(this);
+            FormController = new FormController(this);
+
         }
 
-
+        
         ProductList thisProductList = new ProductList();
 
         // This index keeps track of the current Owl
@@ -170,6 +173,9 @@ namespace cddvdshop
 
         }
 
-       
+        private void btnCreateBook_Click(System.Object sender, System.EventArgs e)
+        {
+            FormController.deactivateAllButBook(this);
+        }
     }
 }

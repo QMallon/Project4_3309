@@ -7,3 +7,12 @@ C:\Users\tug47221\Desktop\cddvdshop\cddvdshop\obj\Debug\cddvdshop.frmBookCDDVDSh
 C:\Users\tug47221\Desktop\cddvdshop\cddvdshop\obj\Debug\cddvdshop.Properties.Resources.resources
 C:\Users\tug47221\Desktop\cddvdshop\cddvdshop\obj\Debug\cddvdshop.csproj.GenerateResource.cache
 C:\Users\tug47221\Desktop\cddvdshop\cddvdshop\obj\Debug\cddvdshop.csproj.CoreCompileInputs.cache
+C:\Users\qpm5\Documents\GitHub\Project4_3309\cddvdshop\cddvdshop\bin\Debug\cddvdshop.exe.config
+C:\Users\qpm5\Documents\GitHub\Project4_3309\cddvdshop\cddvdshop\bin\Debug\cddvdshop.exe
+C:\Users\qpm5\Documents\GitHub\Project4_3309\cddvdshop\cddvdshop\bin\Debug\cddvdshop.pdb
+C:\Users\qpm5\Documents\GitHub\Project4_3309\cddvdshop\cddvdshop\obj\Debug\cddvdshop.frmBookCDDVDShop.resources
+C:\Users\qpm5\Documents\GitHub\Project4_3309\cddvdshop\cddvdshop\obj\Debug\cddvdshop.Properties.Resources.resources
+C:\Users\qpm5\Documents\GitHub\Project4_3309\cddvdshop\cddvdshop\obj\Debug\cddvdshop.csproj.GenerateResource.cache
+C:\Users\qpm5\Documents\GitHub\Project4_3309\cddvdshop\cddvdshop\obj\Debug\cddvdshop.csproj.CoreCompileInputs.cache
+C:\Users\qpm5\Documents\GitHub\Project4_3309\cddvdshop\cddvdshop\obj\Debug\cddvdshop.exe
+C:\Users\qpm5\Documents\GitHub\Project4_3309\cddvdshop\cddvdshop\obj\Debug\cddvdshop.pdb
