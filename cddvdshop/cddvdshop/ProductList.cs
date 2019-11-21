@@ -44,6 +44,17 @@ namespace cddvdshop
             }
             return true;
         }
+        public bool checkISBN(int isbnleft)
+        {
+            foreach(Book b in pList)
+            {
+                if(b.getISBN() == isbnleft)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
         //adds product to list
         public void add(Product addProduct)
         {

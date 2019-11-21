@@ -174,26 +174,37 @@ namespace cddvdshop
                     }
             else
             {
-                validate();
+                validate(1);
             }
             
         }
 
         private void btnEnterUPC_Click(System.Object sender, System.EventArgs e)
         {
-            try
+            if (txtProductUPC.Enabled == false)
             {
-                if (thisProductList.Check(Convert.ToInt32(txtProductUPC.Text)))
-                {
-                    FormController.activateAddButtons(this);
-                }
-                
-                
-                
+                FormController.activateProduct(this);
             }
-            catch
+            else
             {
-                MessageBox.Show("invalid UPC or data");
+                try
+                {
+                    int tempUPC = Convert.ToInt32(txtProductUPC.Text);
+                    {
+
+                        thisProductList.Search(tempUPC).Display(this);
+                        FormController.activateAddButtons(this);
+                        
+                        
+                    }
+
+
+
+                }
+                catch
+                {
+                    MessageBox.Show("invalid UPC or non existant UPC");
+                }
             }
         }
 
@@ -203,20 +214,76 @@ namespace cddvdshop
             Application.Exit();
         }
 
-        private void validate()
+        private void validate(int x)
         {
+            int tempISBNL;
+            int tempISBNR;
+            int tempPages;
+            int tempUPC;
+            decimal tempPrice;
+            int tempQuant;
+            String templeadActor;
+            DateTime tempreleaseDate;
+            int tempRunTime;
+            String CisArea = txtBookCISCISArea.Text;
+
             try
             {
-                int tempUPC = Convert.ToInt32(txtProductUPC.Text);
-                decimal tempPrice = Convert.ToDecimal(txtProductPrice.Text);
-                int tempQuant = Convert.ToInt32(txtProductQuantity.Text);
+                 tempUPC = Convert.ToInt32(txtProductUPC.Text);
+                 tempPrice = Convert.ToDecimal(txtProductPrice.Text);
+                 tempQuant = Convert.ToInt32(txtProductQuantity.Text);
 
-                if(btnCreateBook.Enabled == true)
+                if(x ==1)
                 {
-                    int tempISBNL = Convert.ToInt32(txtBookISBNLeft.Text);
-                    int tempISBNR = Convert.ToInt32(txtBookISBNLeft.Text);
-                    int tempPages = Convert.ToInt32(txtBookPages.Text);
+                    tempISBNL = Convert.ToInt32(txtBookISBNLeft.Text);
+                    tempISBNR = Convert.ToInt32(txtBookISBNRight.Text);
+                    tempPages = Convert.ToInt32(txtBookPages.Text);
+
+
                     thisProductList.add(new Book(tempUPC, tempPrice, txtProductTitle.Text, tempQuant, tempISBNL, tempISBNR, txtBookAuthor.Text, tempPages));
+                    MessageBox.Show("NEW BOOK ADDED");
+                }
+                if (x == 2)
+                {
+                    tempISBNL = Convert.ToInt32(txtBookISBNLeft.Text);
+                    tempISBNR = Convert.ToInt32(txtBookISBNRight.Text);
+                    tempPages = Convert.ToInt32(txtBookPages.Text);
+                    if (thisProductList.checkISBN(tempISBNL) && tempPages > 0)
+                    {
+                        thisProductList.add(new BookCIS(tempUPC, tempPrice, txtProductTitle.Text, tempQuant, tempISBNL, tempISBNR, txtBookAuthor.Text, tempPages, CisArea));
+                        MessageBox.Show("NEW CIS BOOK ADDED");
+                    }
+                    else
+                    {
+                        MessageBox.Show("invalid data");
+                    }
+                    
+                }
+                if( x == 3)
+                {
+                    templeadActor = txtDVDLeadActor.Text;
+                    tempreleaseDate = Convert.ToDateTime(txtDVDReleaseDate.Text);
+                    tempRunTime = Convert.ToInt32(txtDVDRunTime.Text);
+                    if (tempRunTime > 0)
+                    {
+                        thisProductList.add(new DVD(tempUPC, tempPrice, txtProductTitle.Text, tempQuant,templeadActor, tempreleaseDate, tempRunTime));
+                        MessageBox.Show("NEW DVD ADDED");
+                    }
+                    else
+                    {
+                        MessageBox.Show("invalid data");
+                    }
+
+
+
+                }
+                if(x == 3)
+                {
+                    
+                }
+                if (x == 4)
+                {
+
                 }
 
             }
@@ -230,6 +297,46 @@ namespace cddvdshop
         private void btnFind_Click(System.Object sender, System.EventArgs e)
         {
             thisProductList.Search(Convert.ToInt32(txtProductUPC.Text)).Display(this);
+        }
+
+        private void btnCreateBookCIS_Click(System.Object sender, System.EventArgs e)
+        {
+            if (txtBookCISCISArea.Enabled == false)
+            {
+                FormController.activateBookCIS(this);
+                
+            }
+            else
+            {
+                validate(2);
+            }
+        }
+
+        private void btnCreateDVD_Click(System.Object sender, System.EventArgs e)
+        {
+            if (txtDVDLeadActor.Enabled == false)
+            {
+                FormController.activateDVD(this);
+
+            }
+            else
+            {
+                validate(3);
+            }
+        }
+
+        private void btnCreateCDOrchestra_Click(System.Object sender, System.EventArgs e)
+        {
+            if (txtCDOrchestraConductor.Enabled == false)
+            {
+                FormController.activateCDClassical(this);
+                FormController.activateCDOrchestra(this);
+
+            }
+            else
+            {
+                validate(4);
+            }
         }
     }
 }

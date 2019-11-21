@@ -27,6 +27,10 @@ namespace cddvdshop
             hiddenPages = pages;
 
         }
+        public int getISBN()
+        {
+            return hiddenISBNleft;
+        }
         public override void Save(frmBookCDDVDShop f)
         {
             base.Save(f);
@@ -41,8 +45,9 @@ namespace cddvdshop
             f.txtBookAuthor.Text = hiddenAuthor;
             f.txtBookISBNLeft.Text = hiddenISBNleft.ToString();
             f.txtBookISBNRight.Text = hiddenISBNright.ToString();
+            f.txtBookPages.Text = hiddenPages.ToString();
         }
-
+        
         public override string ToString()
         {
             string s =  base.ToString();
