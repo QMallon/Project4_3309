@@ -157,6 +157,14 @@ namespace cddvdshop
             f.btnFind.Enabled = false;
             f.btnSaveEditUpdate.Enabled = true;
         }  // end formAddMode
+        public static void listmode(frmBookCDDVDShop f)
+        {
+            
+            f.btnDelete.Enabled = true;
+            f.btnEdit.Enabled = true;
+            f.btnFind.Enabled = true;
+            f.btnSaveEditUpdate.Enabled = true;
+        }
 
 
         // Enable/disable buttons when not in edit mode

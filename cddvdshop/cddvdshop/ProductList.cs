@@ -7,6 +7,7 @@ using System.Windows.Forms;
 
 namespace cddvdshop
 {
+    [Serializable()]
     public class ProductList
     {
         public List<Product> pList;
@@ -69,6 +70,30 @@ namespace cddvdshop
         public Product getAnItem(int i)
         {
             return pList[i];
+        }
+        public void delete(int upc)
+        {
+            for(int x =0; x< pList.Count; x++)
+            {
+                if (pList[x].ProductUPC == upc)
+                {
+                    pList.RemoveAt(x);
+                }
+
+            }
+        }
+        public String getPType(int upc)
+        {
+
+            foreach (Product p in pList)
+            {
+               if(p.ProductUPC == upc)
+                {
+                    return p.GetType().ToString();
+                }
+               
+            }
+            return "error";
         }
     }
 }
