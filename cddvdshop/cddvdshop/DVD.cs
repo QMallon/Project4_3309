@@ -16,12 +16,14 @@ namespace cddvdshop
         {
 
         }
+        //constructor
         public DVD(int UPC, decimal price, string title, int quantity, string leadActor, DateTime releaseDate, int runTime) : base(UPC, price, title, quantity)
         {
             hiddenLeadActor = leadActor;
-            hiddenReleaseDate = releaseDate;
+            hiddenReleaseDate = releaseDate.Date;
             hiddenRunTime = runTime;
         }
+        //save
         public override void Save(frmBookCDDVDShop f)
         {
             base.Save(f);

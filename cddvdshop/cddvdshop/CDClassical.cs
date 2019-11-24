@@ -29,8 +29,7 @@ namespace cddvdshop.Classes
         // Parameterless Constructor
         public CDClassical()
         {
-            hiddenLabel = "";
-            hiddenArtists = "";
+            
 
         } // end CDClassical Parameterless Constructor
 
@@ -39,8 +38,8 @@ namespace cddvdshop.Classes
         public CDClassical(int UPC, decimal price, string title, int quantity,
             string label, string artists) : base(UPC, price, title, quantity)
         {
-            hiddenLabel = "";
-            hiddenArtists = "";
+            hiddenLabel = label;
+            hiddenArtists = artists;
         }  // end Employee Parameterized Constructor
 
 
@@ -85,7 +84,7 @@ namespace cddvdshop.Classes
         {
             base.Display(f);
             f.txtCDClassicalLabel.Text = hiddenLabel;
-            f.txtCDClassicalArtists.Text = hiddenArtists.ToString();
+            f.txtCDClassicalArtists.Text = hiddenArtists;
         }  // end Display
 
 

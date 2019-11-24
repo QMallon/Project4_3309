@@ -27,10 +27,16 @@ namespace cddvdshop
             hiddenPages = pages;
 
         }
-        public int getISBN()
+        //getters for isbn left and rguith
+        public int getISBNL()
         {
             return hiddenISBNleft;
         }
+        public int getISBNR()
+        {
+            return hiddenISBNright;
+        }
+        //save
         public override void Save(frmBookCDDVDShop f)
         {
             base.Save(f);
@@ -39,6 +45,7 @@ namespace cddvdshop
             hiddenAuthor = f.txtBookAuthor.Text;
             hiddenPages = Convert.ToInt32(f.txtBookPages.Text);
         }  // end Save
+        //display
         public override void Display(frmBookCDDVDShop f)
         {
             base.Display(f);
@@ -47,7 +54,7 @@ namespace cddvdshop
             f.txtBookISBNRight.Text = hiddenISBNright.ToString();
             f.txtBookPages.Text = hiddenPages.ToString();
         }
-        
+        //tpStriong
         public override string ToString()
         {
             string s =  base.ToString();

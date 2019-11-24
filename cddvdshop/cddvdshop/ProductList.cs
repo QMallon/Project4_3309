@@ -34,23 +34,28 @@ namespace cddvdshop
             
             
         }
+        //checks upc
         public bool Check(int upc)
         {
             foreach(Product p in pList)
             {
                 if(p.ProductUPC == upc)
                 {
+                    MessageBox.Show("UPC MUST BE UNIQUE");
                     return false;
                 }
             }
             return true;
         }
-        public bool checkISBN(int isbnleft)
+        //checks left and right isbn to be unique
+
+        public bool checkISBN(int isbnleft, int isbnright)
         {
             foreach(Book b in pList)
             {
-                if(b.getISBN() == isbnleft)
+                if(b.getISBNL() == isbnleft && b.getISBNR() == isbnright)
                 {
+                    MessageBox.Show("ISBN ALREADY USED");
                     return false;
                 }
             }
@@ -82,6 +87,7 @@ namespace cddvdshop
 
             }
         }
+        //gets type
         public String getPType(int upc)
         {
 

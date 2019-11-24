@@ -100,19 +100,31 @@ namespace cddvdshop
             FormController.deactivateBookCIS(f);
             FormController.deactivateCDChamber(f);
             FormController.deactivateDVD(f);
+            FormController.deactivateCreateButtons(f);
+            f.btnCreateBook.Enabled = true;
             //FormController.deactivateAddButtons(f);
         }  // end deactivateAllButBook
 
         // Deactivate all but BookCIS
         public static void deactivateAllButBookCIS(frmBookCDDVDShop f)
         {
-            FormController.deactivateBook(f);
+            
             FormController.deactivateCDOrchestra(f);
             FormController.deactivateCDChamber(f);
             FormController.deactivateDVD(f);
             FormController.deactivateAddButtons(f);
+            FormController.deactivateCreateButtons(f);
+            f.btnCreateBookCIS.Enabled = true;
         }  // end deactivateAllButBookCIS
-
+        //disables create buttons
+        public static void deactivateCreateButtons(frmBookCDDVDShop f)
+        {
+            f.btnCreateBook.Enabled = false;
+            f.btnCreateBookCIS.Enabled = false;
+            f.btnCreateDVD.Enabled = false;
+            f.btnCreateCDChamber.Enabled = false;
+            f.btnCreateCDOrchestra.Enabled = false;
+        }
         // Deactivtae all but DVD
         public static void deactivateAllButDVD(frmBookCDDVDShop f)
         {
@@ -121,6 +133,8 @@ namespace cddvdshop
             FormController.deactivateCDChamber(f);
             FormController.deactivateCDOrchestra(f);
             FormController.deactivateAddButtons(f);
+            FormController.deactivateCreateButtons(f);
+            f.btnCreateDVD.Enabled = true;
         }  // end deactivateAllButDVD
 
         // Deactivate all but CDOrchestra
@@ -131,6 +145,8 @@ namespace cddvdshop
             FormController.deactivateCDChamber(f);
             FormController.deactivateDVD(f);
             FormController.deactivateAddButtons(f);
+            FormController.deactivateCreateButtons(f);
+            f.btnCreateCDOrchestra.Enabled = true;
         }  // end deactivateAllButCDChamber
 
 
@@ -142,6 +158,8 @@ namespace cddvdshop
             FormController.deactivateCDOrchestra(f);
             FormController.deactivateDVD(f);
             FormController.deactivateAddButtons(f);
+            FormController.deactivateCreateButtons(f);
+            f.btnCreateCDChamber.Enabled = true;
         }  // end deactivateAllButCDOrchestra
 
 

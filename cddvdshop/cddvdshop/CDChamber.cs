@@ -28,7 +28,7 @@ namespace cddvdshop.Classes
         // Parameterless Constructor
         public CDChamber()
         {
-            hiddenInstrumentList = "";
+            
         }  // end Parameterless Constructor
 
 
