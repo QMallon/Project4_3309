@@ -51,13 +51,17 @@ namespace cddvdshop
 
         public bool checkISBN(int isbnleft, int isbnright)
         {
-            foreach(Book b in pList)
+            foreach (Book b in pList.OfType<Book>())
             {
-                if(b.getISBNL() == isbnleft && b.getISBNR() == isbnright)
+                if (b.GetType().ToString() == "cddvdshop.Book")
+                {
+
+                
+                if (b.getISBNL() == isbnleft && b.getISBNR() == isbnright)
                 {
                     MessageBox.Show("ISBN ALREADY USED");
                     return false;
-                }
+                } }
             }
             return true;
         }

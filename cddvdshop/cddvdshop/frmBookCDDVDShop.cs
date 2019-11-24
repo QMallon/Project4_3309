@@ -229,7 +229,7 @@ namespace cddvdshop
                     tempPages = Convert.ToInt32(txtBookPages.Text);
 
 
-                    if (tempISBNL.ToString().Length == 3 && tempISBNR.ToString().Length == 3 && thisProductList.checkISBN(tempISBNL, tempISBNR) && tempPages > 0)
+                    if (txtBookISBNLeft.Text.Length ==3 && txtBookISBNRight.Text.Length == 3 && thisProductList.checkISBN(tempISBNL, tempISBNR) && tempPages > 0)
                     {
                         thisProductList.add(new Book(tempUPC, tempPrice, txtProductTitle.Text, tempQuant, tempISBNL, tempISBNR, txtBookAuthor.Text, tempPages));
                         MessageBox.Show("NEW BOOK ADDED");
@@ -244,7 +244,7 @@ namespace cddvdshop
                     tempISBNL = Convert.ToInt32(txtBookISBNLeft.Text);
                     tempISBNR = Convert.ToInt32(txtBookISBNRight.Text);
                     tempPages = Convert.ToInt32(txtBookPages.Text);
-                    if (tempISBNL.ToString().Length == 3 && tempISBNR.ToString().Length == 3 && thisProductList.checkISBN(tempISBNL, tempISBNR) && tempPages > 0)
+                    if (txtBookISBNLeft.Text.Length == 3 && txtBookISBNRight.Text.Length == 3 && thisProductList.checkISBN(tempISBNL, tempISBNR) && tempPages > 0)
                     {
                         thisProductList.add(new BookCIS(tempUPC, tempPrice, txtProductTitle.Text, tempQuant, tempISBNL, tempISBNR, txtBookAuthor.Text, tempPages, CisArea));
                         MessageBox.Show("NEW CIS BOOK ADDED");
