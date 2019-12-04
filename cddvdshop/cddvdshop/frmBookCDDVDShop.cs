@@ -1,5 +1,6 @@
 ﻿using cddvdshop.Classes;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace cddvdshop
@@ -27,7 +28,7 @@ namespace cddvdshop
         string FileName = "PersistentObject.bin";
 
         // Database methods and attributes stored here
-        //ProductDB dbFunctions = new ProductDB();// Parameterless Constructor for fmrEmpMan
+        ProductDB dbFunctions = new ProductDB();// Parameterless Constructor for fmrEmpMan
       
 
         // Tooltip messages
@@ -429,10 +430,13 @@ namespace cddvdshop
                 {
                     int tempUPC = Convert.ToInt32(txtProductUPC.Text);
                     {
-
-                        thisProductList.Search(tempUPC).Display(this);
+                    bool ok = false;
+                    string record = "";
+                    dbFunctions.SelectProductFromProduct(tempUPC, out ok, out record);
+                    //thisProductList.Search(tempUPC).Display(this);
+                    display(record);
                         FormController.activateAddButtons(this);
-                        thisProductList.Search(Convert.ToInt32(txtProductUPC.Text)).Display(this);
+                        //thisProductList.Search(Convert.ToInt32(txtProductUPC.Text)).Display(this);
 
 
                 }
@@ -629,6 +633,32 @@ namespace cddvdshop
 
             }
 
+            
+        }
+        public void display(string record)
+        {
+            string [] tempRecordArray = record.Split();
+            List<string> recordList = new List<string>();
+            foreach(string p in tempRecordArray)
+            {
+                
+                if(p != "")
+                {
+
+                    recordList.Add(p);
+                }
+
+            }
+            int y = 3;
+            
+
+            txtProductUPC.Text = recordList[0];
+            txtProductPrice.Text = recordList[1];
+            while(recordList[y] !="JUST MAKE THE TITLES WORK")
+            txtProductTitle.Text += recordList[y];
+            
+
+            
             
         }
     }
