@@ -1,24 +1,24 @@
 ﻿/*
- * Product Database Class BEST TO DATE
- * Authors: Nick Filauro & Erika Gepilano
- * April 2016 * Version 1
- * 
- * Updated 11/18/2016 * Version 2 * Elliot Stoner
- * Updated 06/17/2017 * Version 3 * Frank Friedman
- * Updated 06/30/2018 * Version 4 * Frank Friedman
- * Updated 06/20/2019 * Version 5 * Frank Friedman
- * Updated 12/02/2019 * Version 6 * Frank Friedman  BEST VERSION TO DATE
- * 
- * Purpose: A class that interacts and performs database operations for Product
- * in a Microsoft Access database using an OLEDB Data Reader.
- * It will contain methods for CRUD (Create, Read, Update, Delete) operations.
- * 
- * !! Requirements !!
- * You must have the Access Database Engine installed on the system you are running the program on.
- * https://www.microsoft.com/en-us/download/details.aspx?id=13255
- * 
- * No constructors were written
- */
+* Product Database Class BEST TO DATE
+* Authors: Nick Filauro & Erika Gepilano
+* April 2016 * Version 1
+* 
+* Updated 11/18/2016 * Version 2 * Elliot Stoner
+* Updated 06/17/2017 * Version 3 * Frank Friedman
+* Updated 06/30/2018 * Version 4 * Frank Friedman
+* Updated 06/20/2019 * Version 5 * Frank Friedman
+* Updated 12/02/2019 * Version 6 * Frank Friedman  BEST VERSION TO DATE
+* 
+* Purpose: A class that interacts and performs database operations for Product
+* in a Microsoft Access database using an OLEDB Data Reader.
+* It will contain methods for CRUD (Create, Read, Update, Delete) operations.
+* 
+* !! Requirements !!
+* You must have the Access Database Engine installed on the system you are running the program on.
+* https://www.microsoft.com/en-us/download/details.aspx?id=13255
+* 
+* No constructors were written
+*/
 
 using System;
 using System.Collections.Generic;
@@ -37,7 +37,7 @@ namespace cddvdshop.Classes
         string fieldsFound = "";
 
         // Connection string for ProductDB (type: Microsoft Access) in the Resources folder
-        string strConnection = "Provider=Microsoft.ACE.OLEDB.12.0;" + "Data Source=../Debug/ProductDB.accdb";
+        string strConnection = "provider=Microsoft.ACE.OLEDB.12.0;" + "Data Source=../Debug/ProductDB.accdb";
         //string strConnection = "provider=Microsoft.ACE.OLEDB.12.0;" + "Data Source= " +
         //    "L:\\ALL MY DATA\\Frank's Syllabus\\AAA CIS 3309 CSharp F19-S20\\CIS 3309 All Projects 2019-20\\BookCDDVD Project (adapted Jupin) DB Version\\ProductDB.accdb";
 
@@ -342,15 +342,11 @@ namespace cddvdshop.Classes
                 dbProductType = myDataReader["fldProductType"].ToString();
                 dbStringProduct = myDataReader["fldUPC"].ToString() + Environment.NewLine;
                 string price = myDataReader["fldPrice"].ToString();
-                string[] priceParts = price.Split('.');
-                if (priceParts[1].Length == 0)
-                {
-                    price = price + "00";
-                }
-                else if (priceParts[1].Length == 1)
-                {
-                    price = price + "0";
-                }
+                price = price.Replace('$', ' ');
+                string[] priceParts = price.Split('.', ' ');
+                if (priceParts.Count() == 1) price = price + ".00";
+                else if (priceParts[1].Length == 0) price = price + "00";
+                else if (priceParts[1].Length == 1) price = price + "0";
                 // dbStringProduct = dbStringProduct + myDataReader["fldPrice"].ToString() + Environment.NewLine;
                 dbStringProduct = dbStringProduct + price + Environment.NewLine;
                 dbStringProduct = dbStringProduct + myDataReader["fldTitle"].ToString() + Environment.NewLine;
@@ -687,15 +683,8 @@ namespace cddvdshop.Classes
                 myDataReader.Read();
                 dbStringProduct = myDataReader["fldUPC"].ToString() + Environment.NewLine;
                 string price = myDataReader["fldPrice"].ToString();
-                string[] priceParts = price.Split('.');
-                if (priceParts[1].Length == 0)
-                {
-                    price = price + "00";
-                }
-                else if (priceParts[1].Length == 1)
-                {
-                    price = price + "0";
-                }
+                price = fixPrice(price);
+
                 dbStringProduct = dbStringProduct + price + Environment.NewLine;
                 dbStringProduct = dbStringProduct + myDataReader["fldTitle"].ToString() + Environment.NewLine;
                 dbStringProduct = dbStringProduct + myDataReader["fldQuantity"].ToString() + Environment.NewLine;
@@ -755,20 +744,11 @@ namespace cddvdshop.Classes
                 if (myDataReader.HasRows == false) OKFlag = false;
                 else OKFlag = true; // returns true if Select was successful
 
-                myDataReader = null;
-
                 myDataReader.Read();
                 dbStringProduct = myDataReader["fldUPC"].ToString() + Environment.NewLine;
                 string price = myDataReader["fldPrice"].ToString();
-                string[] priceParts = price.Split('.');
-                if (priceParts[1].Length == 0)
-                {
-                    price = price + "00";
-                }
-                else if (priceParts[1].Length == 1)
-                {
-                    price = price + "0";
-                }
+
+                price = fixPrice(price);
                 dbStringProduct = dbStringProduct + price + Environment.NewLine;
                 dbStringProduct = dbStringProduct + myDataReader["fldTitle"].ToString() + Environment.NewLine;
                 dbStringProduct = dbStringProduct + myDataReader["fldQuantity"].ToString() + Environment.NewLine;
@@ -834,7 +814,7 @@ namespace cddvdshop.Classes
         {
             string strUpdateBook = "UPDATE Book SET " +
                                     " fldISBN = " + ISBN + ", fldAuthor = '" + author + "', fldPages = " + pages +
-                                    " WHERE fldId = " + UPC;
+                                    " WHERE fldUPC = " + UPC;
 
             OleDbConnection myConnection = new OleDbConnection(strConnection);
             OleDbCommand myCommand = new OleDbCommand(strUpdateBook, myConnection);
@@ -887,8 +867,8 @@ namespace cddvdshop.Classes
         public bool UpdateDVD(int UPC, string leadActor, DateTime releaseDate, int runTime)
         {
             string strUpdateDVD = "UPDATE DVD SET " +
-                                    "fldUPC = " + UPC + ", fldLeadActor = '" + leadActor + "', fldReleaseDate = " +
-                                    releaseDate + ", fldRunTime = " + runTime +
+                                    "fldUPC = " + UPC + ", fldLeadActor = '" + leadActor + "', fldReleaseDate = '" +
+                                    releaseDate + "', fldRunTime = " + runTime +
                                     " WHERE fldUPC = " + UPC;
 
             OleDbConnection myConnection = new OleDbConnection(strConnection);
@@ -896,6 +876,12 @@ namespace cddvdshop.Classes
 
             try
             {
+                releaseDate = fixDate(releaseDate);
+
+                int firstBlank;
+                string tempString = string.Format("{0:MM/dd/yyyy}", releaseDate.ToString());
+                firstBlank = tempString.IndexOf(' ');
+                releaseDate = DateTime.Parse(tempString.Substring(0, firstBlank));
                 myConnection.Open();
                 myCommand.ExecuteNonQuery();
             }
@@ -914,7 +900,7 @@ namespace cddvdshop.Classes
         public bool UpdateCDClassical(int UPC, string label, string artist)
         {
             string strUpdateCDClassical = "UPDATE CDClassical SET fldLabel = '" + label + "', fldArtist = '" + artist + "'" +
-                                       " WHERE fldId = " + UPC;
+                                       " WHERE fldUPC = " + UPC;
 
             OleDbConnection myConnection = new OleDbConnection(strConnection);
             OleDbCommand myCommand = new OleDbCommand(strUpdateCDClassical, myConnection);
@@ -941,7 +927,7 @@ namespace cddvdshop.Classes
         {
             string strUpdateCDChamber =
                 "UPDATE CDChamber SET fldInstrumentList = '" + instrumentList + "' " +
-                " WHERE fldId = " + UPC;
+                " WHERE fldUPC = " + UPC;
 
             OleDbConnection myConnection = new OleDbConnection(strConnection);
             OleDbCommand myCommand = new OleDbCommand(strUpdateCDChamber, myConnection);
@@ -968,7 +954,7 @@ namespace cddvdshop.Classes
         {
             string strUpdateCDOrchestra =
                 "UPDATE CDOrchestra SET fldConductor = '" + conductor + "' " +
-                " WHERE fldId = " + UPC;
+                " WHERE fldUPC = " + UPC;
 
             OleDbConnection myConnection = new OleDbConnection(strConnection);
             OleDbCommand myCommand = new OleDbCommand(strUpdateCDOrchestra, myConnection);
@@ -988,13 +974,7 @@ namespace cddvdshop.Classes
 
             return true; // returns true if Update was successful
         } // end UpdateCDOrchestra
-
-
-
-
         // ********** End of UPDATE methods **********
-
-        // ********** End edits
 
 
 
@@ -1038,10 +1018,6 @@ namespace cddvdshop.Classes
                     {
                         OleDbDataReader reader = command6.ExecuteReader();
                     }
-                    using (OleDbCommand command7 = new OleDbCommand("DELETE FROM ChairProduct WHERE fldUPC = " + UPC, connection))
-                    {
-                        OleDbDataReader reader = command7.ExecuteReader();
-                    }
                     connection.Close();
                 }
                 catch (OleDbException ex)
@@ -1053,6 +1029,31 @@ namespace cddvdshop.Classes
             }  // end using block
             // FormController.clear(this);
         }  // end Delete
-    } // end of Product class
-} // end of namespace} 
 
+
+
+        // Fix price to ensure a decimal point and two places to the right of the decimal
+        string fixPrice(string price)
+        {
+            price = price.Replace('$', ' ');
+            string[] priceParts = price.Split('.', ' ');
+            if (priceParts.Count() == 1) price = price + ".00";
+            else if (priceParts[1].Length == 0) price = price + "00";
+            else if (priceParts[1].Length == 1) price = price + "0";
+            return price;
+        }  // end fixPrice
+
+
+
+        // Fix date to ensure the time is stripped off
+        DateTime fixDate(DateTime releaseDate)
+        {
+            int firstBlank;
+            string tempString = string.Format("{0:MM/dd/yyyy}", releaseDate.ToString());
+            firstBlank = tempString.IndexOf(' ');
+            releaseDate = DateTime.Parse(tempString.Substring(0, firstBlank));
+            return releaseDate;
+        }  // end fixdate
+
+    } // end of Product class
+} // end of namespace

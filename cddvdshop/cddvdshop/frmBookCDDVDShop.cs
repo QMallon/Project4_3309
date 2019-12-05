@@ -649,17 +649,103 @@ namespace cddvdshop
                 }
 
             }
-            int y = 3;
+            int y = 2;
             
 
             txtProductUPC.Text = recordList[0];
             txtProductPrice.Text = recordList[1];
-            while(recordList[y] !="JUST MAKE THE TITLES WORK")
-            txtProductTitle.Text += recordList[y];
-            
 
+            while (!isNum(recordList[y]))
+            {
+                txtProductTitle.Text += recordList[y];
+                y++;
+            }
+            txtProductQuantity.Text = recordList[y];
+            y++;
             
-            
+            if(recordList[y] == "Book")
+            {
+                y++;
+                string tempISBNl = recordList[y].Substring(0);
+                string tempISBNr = recordList[y].Substring(3);
+                txtBookISBNLeft.Text = tempISBNl;
+                txtBookISBNRight.Text = tempISBNl;
+                while (!isNum(recordList[y]) && !isDate(recordList[y]))
+                {
+                    txtBookAuthor.Text += " " + recordList[y];
+                    y++;
+                }
+
+                txtBookPages.Text = recordList[y];
+                
+                
+            }
+            if (recordList[y] == "DVD")
+            {
+                y++;
+                while (!isNum(recordList[y]) && !isDate(recordList[y]))
+                {
+                    txtDVDLeadActor.Text += " "+ recordList[y];
+                    y++;
+                }
+                
+                txtDVDReleaseDate.Text = recordList[y];
+                y++;
+                txtDVDRunTime.Text = recordList[y];
+            }
+            if (recordList[y] == "BookCIS")
+            {
+                y++;
+                string tempISBNl = recordList[y].Substring(0);
+                string tempISBNr = recordList[y].Substring(3);
+                txtBookISBNLeft.Text = tempISBNl;
+                txtBookISBNRight.Text = tempISBNl;
+                while (!isNum(recordList[y]) && !isDate(recordList[y]))
+                {
+                    txtBookAuthor.Text += " " + recordList[y];
+                    y++;
+                }
+
+                txtBookPages.Text = recordList[y];
+                txtBookCISCISArea.Text = recordList[y + 1];
+            }
+            if (recordList[y] == "CDChamber")
+            {
+
+            }
+            if (recordList[y] == "CDOrchestra")
+            {
+                
+            }
+
+
+
+
+        }
+        public bool isNum(string x)
+        {
+            try
+            {
+                Convert.ToInt32(x);
+                return true;
+            }
+            catch
+            {
+                
+                return false;
+            }
+        }
+        public bool isDate(string x)
+        {
+            try
+            {
+                Convert.ToDateTime(x);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
