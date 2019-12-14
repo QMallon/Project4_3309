@@ -1,4 +1,6 @@
-﻿namespace cddvdshop
+﻿using System;
+
+namespace cddvdshop
 {
     partial class frmBookCDDVDShop
     {
@@ -59,28 +61,29 @@
             this.lblPrice = new System.Windows.Forms.Label();
             this.lblUPC = new System.Windows.Forms.Label();
             this.grpBook = new System.Windows.Forms.Panel();
+            this.lblPages = new System.Windows.Forms.Label();
+            this.lblAuthor = new System.Windows.Forms.Label();
+            this.lbldash = new System.Windows.Forms.Label();
+            this.lblISBN = new System.Windows.Forms.Label();
             this.grpDVD = new System.Windows.Forms.Panel();
+            this.lblRunTime = new System.Windows.Forms.Label();
+            this.lblReleaseDate = new System.Windows.Forms.Label();
+            this.lblLeadActor = new System.Windows.Forms.Label();
             this.grpBookCIS = new System.Windows.Forms.Panel();
+            this.lblCisArea = new System.Windows.Forms.Label();
             this.grpCDOrchestra = new System.Windows.Forms.Panel();
+            this.lblConductor = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
             this.grpCDChamber = new System.Windows.Forms.Panel();
+            this.lblInstrumentList = new System.Windows.Forms.Label();
             this.txtCDChamberInstrumentList = new System.Windows.Forms.TextBox();
             this.grpCDClassical = new System.Windows.Forms.Panel();
+            this.lblArtist = new System.Windows.Forms.Label();
+            this.lblCDLabel = new System.Windows.Forms.Label();
             this.txtCDClassicalArtists = new System.Windows.Forms.TextBox();
             this.txtCDClassicalLabel = new System.Windows.Forms.TextBox();
             this.grpProdu = new System.Windows.Forms.Panel();
-            this.lblISBN = new System.Windows.Forms.Label();
-            this.lbldash = new System.Windows.Forms.Label();
-            this.lblAuthor = new System.Windows.Forms.Label();
-            this.lblPages = new System.Windows.Forms.Label();
-            this.lblCisArea = new System.Windows.Forms.Label();
-            this.lblLeadActor = new System.Windows.Forms.Label();
-            this.lblReleaseDate = new System.Windows.Forms.Label();
-            this.lblRunTime = new System.Windows.Forms.Label();
-            this.lblCDLabel = new System.Windows.Forms.Label();
-            this.lblArtist = new System.Windows.Forms.Label();
-            this.lblConductor = new System.Windows.Forms.Label();
-            this.lblInstrumentList = new System.Windows.Forms.Label();
+            this.txtinstructions = new System.Windows.Forms.Label();
             this.grpProduct.SuspendLayout();
             this.grpBook.SuspendLayout();
             this.grpDVD.SuspendLayout();
@@ -397,6 +400,42 @@
             this.grpBook.Size = new System.Drawing.Size(738, 60);
             this.grpBook.TabIndex = 16;
             // 
+            // lblPages
+            // 
+            this.lblPages.AutoSize = true;
+            this.lblPages.Location = new System.Drawing.Point(566, 22);
+            this.lblPages.Name = "lblPages";
+            this.lblPages.Size = new System.Drawing.Size(37, 13);
+            this.lblPages.TabIndex = 23;
+            this.lblPages.Text = "Pages";
+            // 
+            // lblAuthor
+            // 
+            this.lblAuthor.AutoSize = true;
+            this.lblAuthor.Location = new System.Drawing.Point(333, 22);
+            this.lblAuthor.Name = "lblAuthor";
+            this.lblAuthor.Size = new System.Drawing.Size(38, 13);
+            this.lblAuthor.TabIndex = 22;
+            this.lblAuthor.Text = "Author";
+            // 
+            // lbldash
+            // 
+            this.lbldash.AutoSize = true;
+            this.lbldash.Location = new System.Drawing.Point(163, 22);
+            this.lbldash.Name = "lbldash";
+            this.lbldash.Size = new System.Drawing.Size(22, 13);
+            this.lbldash.TabIndex = 21;
+            this.lbldash.Text = "-----";
+            // 
+            // lblISBN
+            // 
+            this.lblISBN.AutoSize = true;
+            this.lblISBN.Location = new System.Drawing.Point(16, 19);
+            this.lblISBN.Name = "lblISBN";
+            this.lblISBN.Size = new System.Drawing.Size(32, 13);
+            this.lblISBN.TabIndex = 20;
+            this.lblISBN.Text = "ISBN";
+            // 
             // grpDVD
             // 
             this.grpDVD.Controls.Add(this.lblRunTime);
@@ -411,6 +450,33 @@
             this.grpDVD.Size = new System.Drawing.Size(738, 81);
             this.grpDVD.TabIndex = 20;
             // 
+            // lblRunTime
+            // 
+            this.lblRunTime.AutoSize = true;
+            this.lblRunTime.Location = new System.Drawing.Point(539, 28);
+            this.lblRunTime.Name = "lblRunTime";
+            this.lblRunTime.Size = new System.Drawing.Size(53, 13);
+            this.lblRunTime.TabIndex = 27;
+            this.lblRunTime.Text = "Run Time";
+            // 
+            // lblReleaseDate
+            // 
+            this.lblReleaseDate.AutoSize = true;
+            this.lblReleaseDate.Location = new System.Drawing.Point(316, 28);
+            this.lblReleaseDate.Name = "lblReleaseDate";
+            this.lblReleaseDate.Size = new System.Drawing.Size(69, 13);
+            this.lblReleaseDate.TabIndex = 26;
+            this.lblReleaseDate.Text = "ReleaseDate";
+            // 
+            // lblLeadActor
+            // 
+            this.lblLeadActor.AutoSize = true;
+            this.lblLeadActor.Location = new System.Drawing.Point(31, 28);
+            this.lblLeadActor.Name = "lblLeadActor";
+            this.lblLeadActor.Size = new System.Drawing.Size(59, 13);
+            this.lblLeadActor.TabIndex = 25;
+            this.lblLeadActor.Text = "Lead Actor";
+            // 
             // grpBookCIS
             // 
             this.grpBookCIS.Controls.Add(this.lblCisArea);
@@ -421,6 +487,15 @@
             this.grpBookCIS.Size = new System.Drawing.Size(738, 67);
             this.grpBookCIS.TabIndex = 0;
             // 
+            // lblCisArea
+            // 
+            this.lblCisArea.AutoSize = true;
+            this.lblCisArea.Location = new System.Drawing.Point(258, 28);
+            this.lblCisArea.Name = "lblCisArea";
+            this.lblCisArea.Size = new System.Drawing.Size(56, 13);
+            this.lblCisArea.TabIndex = 24;
+            this.lblCisArea.Text = "CIS AREA";
+            // 
             // grpCDOrchestra
             // 
             this.grpCDOrchestra.Controls.Add(this.lblConductor);
@@ -430,6 +505,15 @@
             this.grpCDOrchestra.Name = "grpCDOrchestra";
             this.grpCDOrchestra.Size = new System.Drawing.Size(269, 62);
             this.grpCDOrchestra.TabIndex = 26;
+            // 
+            // lblConductor
+            // 
+            this.lblConductor.AutoSize = true;
+            this.lblConductor.Location = new System.Drawing.Point(16, 25);
+            this.lblConductor.Name = "lblConductor";
+            this.lblConductor.Size = new System.Drawing.Size(56, 13);
+            this.lblConductor.TabIndex = 30;
+            this.lblConductor.Text = "Conductor";
             // 
             // panel6
             // 
@@ -454,6 +538,15 @@
             this.grpCDChamber.Size = new System.Drawing.Size(294, 62);
             this.grpCDChamber.TabIndex = 27;
             // 
+            // lblInstrumentList
+            // 
+            this.lblInstrumentList.AutoSize = true;
+            this.lblInstrumentList.Location = new System.Drawing.Point(15, 25);
+            this.lblInstrumentList.Name = "lblInstrumentList";
+            this.lblInstrumentList.Size = new System.Drawing.Size(72, 13);
+            this.lblInstrumentList.TabIndex = 31;
+            this.lblInstrumentList.Text = "InstrumentList";
+            // 
             // txtCDChamberInstrumentList
             // 
             this.txtCDChamberInstrumentList.Location = new System.Drawing.Point(114, 21);
@@ -473,6 +566,24 @@
             this.grpCDClassical.Name = "grpCDClassical";
             this.grpCDClassical.Size = new System.Drawing.Size(738, 43);
             this.grpCDClassical.TabIndex = 28;
+            // 
+            // lblArtist
+            // 
+            this.lblArtist.AutoSize = true;
+            this.lblArtist.Location = new System.Drawing.Point(485, 14);
+            this.lblArtist.Name = "lblArtist";
+            this.lblArtist.Size = new System.Drawing.Size(30, 13);
+            this.lblArtist.TabIndex = 29;
+            this.lblArtist.Text = "Artist";
+            // 
+            // lblCDLabel
+            // 
+            this.lblCDLabel.AutoSize = true;
+            this.lblCDLabel.Location = new System.Drawing.Point(39, 14);
+            this.lblCDLabel.Name = "lblCDLabel";
+            this.lblCDLabel.Size = new System.Drawing.Size(33, 13);
+            this.lblCDLabel.TabIndex = 28;
+            this.lblCDLabel.Text = "Label";
             // 
             // txtCDClassicalArtists
             // 
@@ -505,119 +616,22 @@
             this.grpProdu.Size = new System.Drawing.Size(782, 450);
             this.grpProdu.TabIndex = 26;
             // 
-            // lblISBN
+            // txtinstructions
             // 
-            this.lblISBN.AutoSize = true;
-            this.lblISBN.Location = new System.Drawing.Point(16, 19);
-            this.lblISBN.Name = "lblISBN";
-            this.lblISBN.Size = new System.Drawing.Size(32, 13);
-            this.lblISBN.TabIndex = 20;
-            this.lblISBN.Text = "ISBN";
-            // 
-            // lbldash
-            // 
-            this.lbldash.AutoSize = true;
-            this.lbldash.Location = new System.Drawing.Point(163, 22);
-            this.lbldash.Name = "lbldash";
-            this.lbldash.Size = new System.Drawing.Size(22, 13);
-            this.lbldash.TabIndex = 21;
-            this.lbldash.Text = "-----";
-            // 
-            // lblAuthor
-            // 
-            this.lblAuthor.AutoSize = true;
-            this.lblAuthor.Location = new System.Drawing.Point(333, 22);
-            this.lblAuthor.Name = "lblAuthor";
-            this.lblAuthor.Size = new System.Drawing.Size(38, 13);
-            this.lblAuthor.TabIndex = 22;
-            this.lblAuthor.Text = "Author";
-            // 
-            // lblPages
-            // 
-            this.lblPages.AutoSize = true;
-            this.lblPages.Location = new System.Drawing.Point(566, 22);
-            this.lblPages.Name = "lblPages";
-            this.lblPages.Size = new System.Drawing.Size(37, 13);
-            this.lblPages.TabIndex = 23;
-            this.lblPages.Text = "Pages";
-            // 
-            // lblCisArea
-            // 
-            this.lblCisArea.AutoSize = true;
-            this.lblCisArea.Location = new System.Drawing.Point(258, 28);
-            this.lblCisArea.Name = "lblCisArea";
-            this.lblCisArea.Size = new System.Drawing.Size(56, 13);
-            this.lblCisArea.TabIndex = 24;
-            this.lblCisArea.Text = "CIS AREA";
-            // 
-            // lblLeadActor
-            // 
-            this.lblLeadActor.AutoSize = true;
-            this.lblLeadActor.Location = new System.Drawing.Point(31, 28);
-            this.lblLeadActor.Name = "lblLeadActor";
-            this.lblLeadActor.Size = new System.Drawing.Size(59, 13);
-            this.lblLeadActor.TabIndex = 25;
-            this.lblLeadActor.Text = "Lead Actor";
-            // 
-            // lblReleaseDate
-            // 
-            this.lblReleaseDate.AutoSize = true;
-            this.lblReleaseDate.Location = new System.Drawing.Point(316, 28);
-            this.lblReleaseDate.Name = "lblReleaseDate";
-            this.lblReleaseDate.Size = new System.Drawing.Size(69, 13);
-            this.lblReleaseDate.TabIndex = 26;
-            this.lblReleaseDate.Text = "ReleaseDate";
-            // 
-            // lblRunTime
-            // 
-            this.lblRunTime.AutoSize = true;
-            this.lblRunTime.Location = new System.Drawing.Point(539, 28);
-            this.lblRunTime.Name = "lblRunTime";
-            this.lblRunTime.Size = new System.Drawing.Size(53, 13);
-            this.lblRunTime.TabIndex = 27;
-            this.lblRunTime.Text = "Run Time";
-            // 
-            // lblCDLabel
-            // 
-            this.lblCDLabel.AutoSize = true;
-            this.lblCDLabel.Location = new System.Drawing.Point(39, 14);
-            this.lblCDLabel.Name = "lblCDLabel";
-            this.lblCDLabel.Size = new System.Drawing.Size(33, 13);
-            this.lblCDLabel.TabIndex = 28;
-            this.lblCDLabel.Text = "Label";
-            // 
-            // lblArtist
-            // 
-            this.lblArtist.AutoSize = true;
-            this.lblArtist.Location = new System.Drawing.Point(485, 14);
-            this.lblArtist.Name = "lblArtist";
-            this.lblArtist.Size = new System.Drawing.Size(30, 13);
-            this.lblArtist.TabIndex = 29;
-            this.lblArtist.Text = "Artist";
-            // 
-            // lblConductor
-            // 
-            this.lblConductor.AutoSize = true;
-            this.lblConductor.Location = new System.Drawing.Point(16, 25);
-            this.lblConductor.Name = "lblConductor";
-            this.lblConductor.Size = new System.Drawing.Size(56, 13);
-            this.lblConductor.TabIndex = 30;
-            this.lblConductor.Text = "Conductor";
-            // 
-            // lblInstrumentList
-            // 
-            this.lblInstrumentList.AutoSize = true;
-            this.lblInstrumentList.Location = new System.Drawing.Point(15, 25);
-            this.lblInstrumentList.Name = "lblInstrumentList";
-            this.lblInstrumentList.Size = new System.Drawing.Size(72, 13);
-            this.lblInstrumentList.TabIndex = 31;
-            this.lblInstrumentList.Text = "InstrumentList";
+            this.txtinstructions.AutoSize = true;
+            this.txtinstructions.Location = new System.Drawing.Point(81, 20);
+            this.txtinstructions.Name = "txtinstructions";
+            this.txtinstructions.Size = new System.Drawing.Size(506, 13);
+            this.txtinstructions.TabIndex = 32;
+            this.txtinstructions.Text = "To create a product click its create button to open the form to enter its fields " +
+    "then click it again to create it.";
             // 
             // frmBookCDDVDShop
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1094, 615);
+            this.Controls.Add(this.txtinstructions);
             this.Controls.Add(this.grpProdu);
             this.Controls.Add(this.panel6);
             this.Controls.Add(this.btnCreateCDChamber);
@@ -648,7 +662,13 @@
             this.grpCDClassical.PerformLayout();
             this.grpProdu.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
+        }
+
+        private void textBox9_TextChanged(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion
@@ -705,5 +725,6 @@
         private System.Windows.Forms.Label lblInstrumentList;
         private System.Windows.Forms.Label lblArtist;
         private System.Windows.Forms.Label lblCDLabel;
+        private System.Windows.Forms.Label txtinstructions;
     }
 }

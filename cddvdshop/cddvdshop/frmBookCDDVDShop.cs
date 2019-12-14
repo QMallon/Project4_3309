@@ -72,7 +72,7 @@ namespace cddvdshop
         private void frmBookCDDVDShop_Load(System.Object sender, System.EventArgs e)
         {
             // Read serialized binary data file
-            SFManager.ReadFromFile(ref thisProductList, FileName);
+            //SFManager.ReadFromFile(ref thisProductList, FileName);
             FormController.clear(this);
             ToolTip toolTip1 = new ToolTip();
             // Set initial Tooltips
@@ -163,10 +163,7 @@ namespace cddvdshop
 
 
 
-        private void textBox9_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void btnCreateBook_Click(System.Object sender, System.EventArgs e)
         {
@@ -176,7 +173,28 @@ namespace cddvdshop
                     }
             else
             {
-                validate(1);
+                if (validateBook())
+                {
+                    int tempISBNL = Convert.ToInt32(txtBookISBNLeft.Text);
+                    int tempISBNR = Convert.ToInt32(txtBookISBNRight.Text);
+                    int tempPages = Convert.ToInt32(txtBookPages.Text);
+                    int tempUPC = Convert.ToInt32(txtProductUPC.Text);
+                    decimal tempPrice = Convert.ToDecimal(txtProductPrice.Text);
+                    int tempQuant = Convert.ToInt32(txtProductQuantity.Text);
+
+
+
+                    dbFunctions.InsertProduct(tempUPC, tempPrice, txtProductTitle.Text, tempQuant, "Book");
+                   
+                    MessageBox.Show("NEW BOOK ADDED");
+                    
+                        
+                }
+                else
+                {
+                    MessageBox.Show("Invalid data");
+                }
+
             }
             
         }
@@ -185,7 +203,7 @@ namespace cddvdshop
         {
             if (txtProductUPC.Enabled == false)
             {
-                FormController.activateProduct(this);
+                txtProductUPC.Enabled = true;
                 FormController.listmode(this);
             }
             
@@ -193,121 +211,10 @@ namespace cddvdshop
 
         private void btnExit_Click(System.Object sender, System.EventArgs e)
         {
-            SFManager.writeToFile( thisProductList, FileName);
+            //SFManager.writeToFile( thisProductList, FileName);
             Application.Exit();
         }
-        //Validate data
-        private void validate(int x)
-        {
-            int tempISBNL;
-            int tempISBNR;
-            int tempPages;
-            int tempUPC;
-            decimal tempPrice;
-            int tempQuant;
-            String templeadActor;
-            DateTime tempreleaseDate;
-            int tempRunTime;
-            String CisArea = txtBookCISCISArea.Text;
-            string tempConductor;
-            string tempCDArtist;
-            String tempCDLabel;
-            string tempinstrumentList;
-
-
-
-
-            try
-            {
-                 tempUPC = Convert.ToInt32(txtProductUPC.Text);
-                 tempPrice = Convert.ToDecimal(txtProductPrice.Text);
-                 tempQuant = Convert.ToInt32(txtProductQuantity.Text);
-
-                if(x ==1)
-                {
-                    tempISBNL = Convert.ToInt32(txtBookISBNLeft.Text);
-                    tempISBNR = Convert.ToInt32(txtBookISBNRight.Text);
-                    tempPages = Convert.ToInt32(txtBookPages.Text);
-
-
-                    if (txtBookISBNLeft.Text.Length ==3 && txtBookISBNRight.Text.Length == 3 && thisProductList.checkISBN(tempISBNL, tempISBNR) && tempPages > 0)
-                    {
-                        thisProductList.add(new Book(tempUPC, tempPrice, txtProductTitle.Text, tempQuant, tempISBNL, tempISBNR, txtBookAuthor.Text, tempPages));
-                        MessageBox.Show("NEW BOOK ADDED");
-                    }
-                    else
-                    {
-                        MessageBox.Show("invalid data");
-                    }
-                }
-                if (x == 2)
-                {
-                    tempISBNL = Convert.ToInt32(txtBookISBNLeft.Text);
-                    tempISBNR = Convert.ToInt32(txtBookISBNRight.Text);
-                    tempPages = Convert.ToInt32(txtBookPages.Text);
-                    if (txtBookISBNLeft.Text.Length == 3 && txtBookISBNRight.Text.Length == 3 && thisProductList.checkISBN(tempISBNL, tempISBNR) && tempPages > 0)
-                    {
-                        thisProductList.add(new BookCIS(tempUPC, tempPrice, txtProductTitle.Text, tempQuant, tempISBNL, tempISBNR, txtBookAuthor.Text, tempPages, CisArea));
-                        MessageBox.Show("NEW CIS BOOK ADDED");
-                    }
-                    else
-                    {
-                        MessageBox.Show("invalid data");
-                    }
-                    
-                }
-                if( x == 3)
-                {
-                    DateTime min = new DateTime(1980,01,01);
-                    DateTime max = new DateTime(2019,12,31);
-                    templeadActor = txtDVDLeadActor.Text;
-                    tempreleaseDate = Convert.ToDateTime(txtDVDReleaseDate.Text);
-                    tempRunTime = Convert.ToInt32(txtDVDRunTime.Text);
-                    if (tempRunTime > 0 && tempreleaseDate > min && tempreleaseDate < max)
-                    {
-                        thisProductList.add(new DVD(tempUPC, tempPrice, txtProductTitle.Text, tempQuant,templeadActor, tempreleaseDate, tempRunTime));
-                        MessageBox.Show("NEW DVD ADDED");
-                    }
-                    else
-                    {
-                        MessageBox.Show("invalid data");
-                    }
-
-
-
-                }
-                if(x == 4)
-                {
-                    tempCDArtist =  txtCDClassicalArtists.Text;
-                    tempCDLabel = txtCDClassicalLabel.Text;
-                    tempConductor = txtCDOrchestraConductor.Text;
-                        
-                    
-                    
-                        thisProductList.add(new CDOrchestra(tempUPC, tempPrice, txtProductTitle.Text, tempQuant, tempCDArtist, tempCDLabel, tempConductor));
-                        MessageBox.Show("NEW CD Orchestra ADDED");
-                    
-                    
-                }
-                if (x == 5)
-                {
-                    tempCDArtist = txtCDClassicalArtists.Text;
-                    tempCDLabel = txtCDClassicalLabel.Text;
-                    tempinstrumentList = txtCDChamberInstrumentList.Text;
-
-
-
-                    thisProductList.add(new CDChamber(tempUPC, tempPrice, txtProductTitle.Text, tempQuant, tempCDArtist, tempCDLabel, tempinstrumentList));
-                    MessageBox.Show("NEW CD Chamber ADDED");
-                }
-
-            }
-            catch
-            {
-                MessageBox.Show("invalid data");
-            }
-
-        }
+       
         //validate for edits checks 
         private bool validateEdit(int x)
         {
@@ -428,8 +335,12 @@ namespace cddvdshop
             
                 try
                 {
+                if (Validation.validateUPC(txtProductUPC.Text))
+                {
+
+                
                     int tempUPC = Convert.ToInt32(txtProductUPC.Text);
-                    {
+                    
                     bool ok = false;
                     string record = "";
                     dbFunctions.SelectProductFromProduct(tempUPC, out ok, out record);
@@ -440,13 +351,17 @@ namespace cddvdshop
 
 
                 }
+                else
+                {
+                    MessageBox.Show("INVALID UPC ENTERED MUST BE AN Int ");
+                }
 
 
 
                 }
                 catch
                 {
-                    MessageBox.Show("invalid UPC or non existant UPC");
+                    MessageBox.Show("DB error UPC does not exist");
                 }
             
             
@@ -463,10 +378,25 @@ namespace cddvdshop
             }
             else
             {
-                validate(2);
+                if (validateBookCis())
+                {
+                   int tempUPC = Convert.ToInt32(txtProductUPC.Text);
+                   decimal tempPrice = Convert.ToDecimal(txtProductPrice.Text);
+                   int tempQuant = Convert.ToInt32(txtProductQuantity.Text);
+                   int tempISBNL = Convert.ToInt32(txtBookISBNLeft.Text);
+                   int tempISBNR = Convert.ToInt32(txtBookISBNRight.Text);
+                   int tempPages = Convert.ToInt32(txtBookPages.Text);
+
+
+
+                    dbFunctions.InsertProduct(tempUPC, tempPrice, txtProductTitle.Text, tempQuant, "BookCis");
+                    dbFunctions.InsertBookCIS(tempUPC, txtBookCISCISArea.Text);
+                    MessageBox.Show("NEW CIS BOOK ADDED");
+
+                }
             }
         }
-
+        //creates dvd
         private void btnCreateDVD_Click(System.Object sender, System.EventArgs e)
         {
             if (txtDVDLeadActor.Enabled == false)
@@ -477,10 +407,23 @@ namespace cddvdshop
             }
             else
             {
-                validate(3);
+                if (validateDVD())
+                {
+                   string templeadActor = txtDVDLeadActor.Text;
+                  DateTime  tempreleaseDate = Convert.ToDateTime(txtDVDReleaseDate.Text);
+                   int tempRunTime = Convert.ToInt32(txtDVDRunTime.Text);
+                    int tempUPC = Convert.ToInt32(txtProductUPC.Text);
+                    decimal tempPrice = Convert.ToDecimal(txtProductPrice.Text);
+                    int tempQuant = Convert.ToInt32(txtProductQuantity.Text);
+
+                    dbFunctions.InsertProduct(tempUPC, tempPrice, txtProductTitle.Text, tempQuant, "DVD");
+                    dbFunctions.InsertDVD(tempUPC, txtDVDLeadActor.Text, tempreleaseDate, tempRunTime);
+
+                    MessageBox.Show("NEW DVD ADDED");
+                }
             }
         }
-
+        //creates cd orchestra
         private void btnCreateCDOrchestra_Click(System.Object sender, System.EventArgs e)
         {
             if (txtCDOrchestraConductor.Enabled == false)
@@ -492,10 +435,24 @@ namespace cddvdshop
             }
             else
             {
-                validate(4);
+                if (validateCDOrchestra())
+                {
+                    int tempUPC = Convert.ToInt32(txtProductUPC.Text);
+                    decimal tempPrice = Convert.ToDecimal(txtProductPrice.Text);
+                    int tempQuant = Convert.ToInt32(txtProductQuantity.Text);
+                    string  tempCDArtist = txtCDClassicalArtists.Text;
+                    string tempCDLabel = txtCDClassicalLabel.Text;
+                    string tempConductor = txtCDOrchestraConductor.Text;
+                    dbFunctions.InsertProduct(tempUPC, tempPrice, txtProductTitle.Text, tempQuant, "CDOrchestra");
+                    dbFunctions.InsertCDClassical(tempUPC, tempCDLabel, tempCDArtist);
+                    dbFunctions.InsertCDChamber(tempUPC, tempConductor);
+
+                    MessageBox.Show("CD Orchestra added");
+
+                }
             }
         }
-
+        //creates the cd chamber
         private void btnCreateCDChamber_Click(System.Object sender, System.EventArgs e)
         {
             if (txtCDChamberInstrumentList.Enabled == false)
@@ -507,134 +464,151 @@ namespace cddvdshop
             }
             else
             {
-                validate(5);
+                if (validateCDChamber())
+                {
+                    int tempUPC = Convert.ToInt32(txtProductUPC.Text);
+                    decimal tempPrice = Convert.ToDecimal(txtProductPrice.Text);
+                    int tempQuant = Convert.ToInt32(txtProductQuantity.Text);
+                    string tempCDArtist = txtCDClassicalArtists.Text;
+                    string tempCDLabel = txtCDClassicalLabel.Text;
+                    string tempChamberInstList = txtCDChamberInstrumentList.Text;
+
+                    dbFunctions.InsertProduct(tempUPC, tempPrice, txtProductTitle.Text, tempQuant, "CDChamber");
+                    dbFunctions.InsertCDClassical(tempUPC, tempCDLabel, tempCDArtist);
+                    dbFunctions.InsertCDChamber(tempUPC, tempChamberInstList);
+                    MessageBox.Show("CD CHamber added");
+                }
             }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Product Deleted");
-            thisProductList.delete(Convert.ToInt32(txtProductUPC.Text));
-            SFManager.writeToFile(thisProductList, FileName);
             
+            dbFunctions.Delete(Convert.ToInt32(txtProductUPC.Text));
+            
+            MessageBox.Show("Product Deleted");
+
         }
         //edit determines what shows based on the type
         private void btnEdit_Click(System.Object sender, System.EventArgs e)
         {
-            MessageBox.Show(thisProductList.getPType(Convert.ToInt32(txtProductUPC.Text)));
-            if(thisProductList.getPType(Convert.ToInt32(txtProductUPC.Text)) == "cddvdshop.Book")
+            bool ok = false;
+            string record = "";
+            int tempUPC = Convert.ToInt32(txtProductUPC.Text);
+            
+            if (dbFunctions.getProductType() == "Book")
             {
                 FormController.activateBook(this);
                 FormController.deactivateAllButBook(this);
                 btnCreateBook.Enabled = false;
             }
-            if (thisProductList.getPType(Convert.ToInt32(txtProductUPC.Text)) == "cddvdshop.BookCIS")
+            if (dbFunctions.getProductType() == "BookCis")
             {
                 FormController.activateBookCIS(this);
                 FormController.deactivateAllButBookCIS(this);
                 btnCreateBookCIS.Enabled = false;
             }
-            if (thisProductList.getPType(Convert.ToInt32(txtProductUPC.Text)) == "cddvdshop.DVD")
+            if (dbFunctions.getProductType() == "DVD")
             {
                 FormController.activateDVD(this);
                 FormController.deactivateAllButDVD(this);
                 btnCreateDVD.Enabled = false;
             }
-            if (thisProductList.getPType(Convert.ToInt32(txtProductUPC.Text)) == "cddvdshop.CDOrchestra")
+            if (dbFunctions.getProductType() == "CDChamber")
             {
                 FormController.activateCDOrchestra(this);
                 FormController.deactivateAllButCDOrchestra(this);
                 btnCreateCDOrchestra.Enabled = false;
             }
-            if (thisProductList.getPType(Convert.ToInt32(txtProductUPC.Text)) == "cddvdshop.CDChamber")
+            if (dbFunctions.getProductType() == "CDOrchestra")
             {
                 FormController.activateCDChamber(this);
                 FormController.deactivateAllButCDChamber(this);
                 btnCreateCDChamber.Enabled = false;
             }
         }
-
+        //finds what type it is then goes to update it using it
         private void btnSaveEditUpdate_Click(System.Object sender, System.EventArgs e)
         {
-            if (thisProductList.getPType(Convert.ToInt32(txtProductUPC.Text)) == "cddvdshop.Book")
+            if (dbFunctions.getProductType() == "Book")
             {
-                if (validateEdit(1)){
-                    SFManager.writeToFile(thisProductList, FileName);
-                    MessageBox.Show("Changes saved");
-                    thisProductList.delete(Convert.ToInt32(txtProductUPC.Text));
-                }
-                else
+                if (validateBook())
                 {
-                    MessageBox.Show("invalid data");
+                    int tempUPC = Convert.ToInt32(txtProductUPC.Text);
+                    decimal tempPrice = Convert.ToDecimal(txtProductPrice.Text);
+                    int tempQuant = Convert.ToInt32(txtProductQuantity.Text);
+                    int tempISBNL = Convert.ToInt32(txtBookISBNLeft.Text);
+                    int tempISBNR = Convert.ToInt32(txtBookISBNRight.Text);
+                    int tempPages = Convert.ToInt32(txtBookPages.Text);
+                    int tempfullISBN = int.Parse(tempISBNL.ToString() + tempISBNR.ToString());
+                    dbFunctions.UpdateProduct(tempUPC, tempPrice, txtProductTitle.Text, tempQuant);
+                    dbFunctions.UpdateBook(tempUPC, tempfullISBN, txtBookAuthor.Text, tempPages);
+
                 }
+            }
+            if (dbFunctions.getProductType() == "BookCis")
+            {
+                if (validateBookCis())
+                {
+                    int tempUPC = Convert.ToInt32(txtProductUPC.Text);
+                    decimal tempPrice = Convert.ToDecimal(txtProductPrice.Text);
+                    int tempQuant = Convert.ToInt32(txtProductQuantity.Text);
+                    int tempISBNL = Convert.ToInt32(txtBookISBNLeft.Text);
+                    int tempISBNR = Convert.ToInt32(txtBookISBNRight.Text);
+                    int tempPages = Convert.ToInt32(txtBookPages.Text);
+                    int tempfullISBN = int.Parse(tempISBNL.ToString() + tempISBNR.ToString());
+                    dbFunctions.UpdateProduct(tempUPC, tempPrice, txtProductTitle.Text, tempQuant);
+                    dbFunctions.UpdateBook(tempUPC, tempfullISBN, txtBookAuthor.Text, tempPages);
+                    dbFunctions.UpdateBookCIS(tempUPC, txtBookCISCISArea.Text);
+                    MessageBox.Show("CIS BOOK updated");
 
-
+                }
+            }
+            if (dbFunctions.getProductType() == "DVD")
+            {
+                int tempUPC = Convert.ToInt32(txtProductUPC.Text);
+                decimal tempPrice = Convert.ToDecimal(txtProductPrice.Text);
+                int tempQuant = Convert.ToInt32(txtProductQuantity.Text);
+                string templeadActor = txtDVDLeadActor.Text;
+                DateTime tempreleaseDate = Convert.ToDateTime(txtDVDReleaseDate.Text);
+                int tempRunTime = Convert.ToInt32(txtDVDRunTime.Text);
+                dbFunctions.UpdateProduct(tempUPC, tempPrice, txtProductTitle.Text, tempQuant);
+                dbFunctions.UpdateDVD(tempUPC, txtDVDLeadActor.Text, tempreleaseDate, tempRunTime);
 
             }
-            if (thisProductList.getPType(Convert.ToInt32(txtProductUPC.Text)) == "cddvdshop.BookCIS")
+            if (dbFunctions.getProductType() == "CDChamber")
             {
-                if (validateEdit(2)){
-                    SFManager.writeToFile(thisProductList, FileName);
-                    MessageBox.Show("Changes saved");
-                    thisProductList.delete(Convert.ToInt32(txtProductUPC.Text));
-                }
-                else
-                {
-                    MessageBox.Show("invalid data");
-                }
-
-
-
-
-
-            }
-            if (thisProductList.getPType(Convert.ToInt32(txtProductUPC.Text)) == "cddvdshop.DVD")
-            {
-                if (validateEdit(3)){
-                    SFManager.writeToFile(thisProductList, FileName);
-                    MessageBox.Show("Changes saved");
-                    thisProductList.delete(Convert.ToInt32(txtProductUPC.Text));
-                }
-                else
-                {
-                    MessageBox.Show("invalid data");
-                }
-
-
-            }
-            if (thisProductList.getPType(Convert.ToInt32(txtProductUPC.Text)) == "cddvdshop.CDOrchestra")
-            {
-                if (validateEdit(4)){
-                    SFManager.writeToFile(thisProductList, FileName);
-                    MessageBox.Show("Changes saved");
-                    thisProductList.delete(Convert.ToInt32(txtProductUPC.Text));
-                }
-                else
-                {
-                    MessageBox.Show("invalid data");
-                }
-
-
-            }
-            if (thisProductList.getPType(Convert.ToInt32(txtProductUPC.Text)) == "cddvdshop.CDChamber")
-            {
-                if (validateEdit(5))
-                {
-                    SFManager.writeToFile(thisProductList, FileName);
-                    MessageBox.Show("Changes saved");
-                    thisProductList.delete(Convert.ToInt32(txtProductUPC.Text));
-                }
-                else
-                {
-                    MessageBox.Show("invalid data");
-                }
+                int tempUPC = Convert.ToInt32(txtProductUPC.Text);
+                decimal tempPrice = Convert.ToDecimal(txtProductPrice.Text);
+                int tempQuant = Convert.ToInt32(txtProductQuantity.Text);
+                string tempCDArtist = txtCDClassicalArtists.Text;
+                string tempCDLabel = txtCDClassicalLabel.Text;
+                string tempChamberInstList = txtCDChamberInstrumentList.Text;
                 
+                dbFunctions.UpdateProduct(tempUPC, tempPrice, txtProductTitle.Text, tempQuant);
+                dbFunctions.UpdateCDClassical(tempUPC, tempCDLabel, tempCDArtist);
+                dbFunctions.UpdateCDChamber(tempUPC, tempChamberInstList);
 
+            }
+            if (dbFunctions.getProductType() == "CDOrchestra")
+            {
+                int tempUPC = Convert.ToInt32(txtProductUPC.Text);
+                decimal tempPrice = Convert.ToDecimal(txtProductPrice.Text);
+                int tempQuant = Convert.ToInt32(txtProductQuantity.Text);
+                string tempCDArtist = txtCDClassicalArtists.Text;
+                string tempCDLabel = txtCDClassicalLabel.Text;
+                string tempConductor = txtCDOrchestraConductor.Text;
+
+                dbFunctions.UpdateProduct(tempUPC, tempPrice, txtProductTitle.Text, tempQuant);
+                dbFunctions.UpdateCDClassical(tempUPC, tempCDLabel, tempCDArtist);
+                dbFunctions.UpdateCDOrchestra(tempUPC, tempConductor);
+               
 
             }
 
-            
+
         }
+        //displays the different buttons for the products
         public void display(string record)
         {
             string [] tempRecordArray = record.Split();
@@ -655,7 +629,7 @@ namespace cddvdshop
             txtProductUPC.Text = recordList[0];
             txtProductPrice.Text = recordList[1];
 
-            while (!isNum(recordList[y]))
+            while (!Validation.validateIntNumber(recordList[y]))
             {
                 txtProductTitle.Text += recordList[y];
                 y++;
@@ -670,7 +644,7 @@ namespace cddvdshop
                 string tempISBNr = recordList[y].Substring(3);
                 txtBookISBNLeft.Text = tempISBNl;
                 txtBookISBNRight.Text = tempISBNl;
-                while (!isNum(recordList[y]) && !isDate(recordList[y]))
+                while (!Validation.validateIntNumber(recordList[y]) && !Validation.validateIntNumber(recordList[y]))
                 {
                     txtBookAuthor.Text += " " + recordList[y];
                     y++;
@@ -683,7 +657,7 @@ namespace cddvdshop
             if (recordList[y] == "DVD")
             {
                 y++;
-                while (!isNum(recordList[y]) && !isDate(recordList[y]))
+                while (!Validation.validateIntNumber(recordList[y]) && !Validation.validateIntNumber(recordList[y]))
                 {
                     txtDVDLeadActor.Text += " "+ recordList[y];
                     y++;
@@ -700,7 +674,7 @@ namespace cddvdshop
                 string tempISBNr = recordList[y].Substring(3);
                 txtBookISBNLeft.Text = tempISBNl;
                 txtBookISBNRight.Text = tempISBNl;
-                while (!isNum(recordList[y]) && !isDate(recordList[y]))
+                while (!Validation.validateIntNumber(recordList[y]) && !Validation.validateIntNumber(recordList[y]))
                 {
                     txtBookAuthor.Text += " " + recordList[y];
                     y++;
@@ -722,30 +696,37 @@ namespace cddvdshop
 
 
         }
-        public bool isNum(string x)
+
+
+        //Validation calls to validate class shortcuts
+        public bool validateproduct()
         {
-            try
-            {
-                Convert.ToInt32(x);
-                return true;
-            }
-            catch
-            {
-                
-                return false;
-            }
+            return Validation.validateUPC(txtProductUPC.Text) && Validation.validateTitle(txtProductTitle.Text) && Validation.validatePrice(txtProductPrice.Text) && Validation.validateIntNumber(txtProductQuantity.Text);
         }
-        public bool isDate(string x)
+        public bool validateBook()
         {
-            try
-            {
-                Convert.ToDateTime(x);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            return validateproduct() && Validation.validateISBN(txtBookISBNLeft.Text) && Validation.validateISBN(txtBookISBNRight.Text) && Validation.validateName(txtBookAuthor.Text) && Validation.validateIntNumber(txtBookPages.Text);
+        }
+        public bool validateBookCis()
+        {
+            return validateproduct() && validateBook() && Validation.validateTitle(txtBookCISCISArea.Text);
+        }
+        public bool validateDVD()
+        {
+            return validateproduct() && Validation.validateName(txtDVDLeadActor.Text) && Validation.validateReleaseDate(Convert.ToDateTime(txtDVDReleaseDate.Text)) && Validation.validateRunTime(txtDVDRunTime.Text);
+        }
+        public bool validateCD()
+        {
+            return validateproduct() && Validation.validateTitle(txtCDClassicalLabel.Text) && Validation.validateArtists(txtCDClassicalArtists.Text);
+
+        }
+        public bool validateCDOrchestra()
+        {
+            return validateproduct() && validateCD() && Validation.validateName(txtCDOrchestraConductor.Text);
+        }
+        public bool validateCDChamber()
+        {
+            return validateproduct() && validateCD() && Validation.validateInstruments(txtCDChamberInstrumentList.Text);
         }
     }
 }
