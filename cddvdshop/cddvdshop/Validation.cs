@@ -75,8 +75,7 @@ namespace cddvdshop
                 return regex.IsMatch(name);
             }
 
-            //between 1/1/95 and 12/31/19
-            //use DateTimePicker so input will be valid - just check logic
+            //between 1/1/95 and 12/31/19           
             public static bool validateReleaseDate(DateTime releaseDate)
             {
                 DateTime start = new DateTime(11 / 01 / 1996);
